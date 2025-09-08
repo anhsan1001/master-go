@@ -1,19 +1,9 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
+	librarymangement "main/library-mangement"
 )
 
 func main() {
-	// This is a placeholder for the main function.
-	var name string
-
-	fmt.Println("Nhap ten cua ban: ")
-	scanner := bufio.NewScanner(os.Stdin)
-	if scanner.Scan() {
-		name = scanner.Text()
-	}
-	fmt.Printf("Hello, %s!\n", name)
+	librarymangement.Menu()
 }

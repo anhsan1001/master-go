@@ -8,6 +8,8 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+
+	"github.com/google/uuid"
 )
 
 func ReadInput(prompt string) string {
@@ -61,4 +63,8 @@ func GetNonEmptyString(prompt string) string {
 		}
 		fmt.Println("Not allowed empty string ")
 	}
+}
+
+func GenerateID() string {
+	return uuid.New().String()
 }

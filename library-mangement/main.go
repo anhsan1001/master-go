@@ -2,43 +2,76 @@ package librarymangement
 
 import (
 	"fmt"
+
 	"main/utils"
 )
 
 func Menu() {
+	lib := NewLibrary()
 	for {
 		utils.ClearScreen()
-		fmt.Println("---------------LIBRARY MANAGEMENT---------------")
-		fmt.Println("1. Add book")
-		fmt.Println("2. Get Book List")
-		fmt.Println("3. Add book renter")
-		fmt.Println("4. Get book renter list")
-		fmt.Println("5. Rent book")
-		fmt.Println("6. Rent book history")
-		fmt.Println("7. Return book")
-		fmt.Println("8. Find book")
-		fmt.Println("9. Exit")
-		choice := utils.GetPositiveIntInput("Enter choose feature: ")
+
+		fmt.Println("---------------QUAN LY THU VIEN---------------")
+		fmt.Println("1. Them sach")
+		fmt.Println("2. Xem danh sach")
+		fmt.Println("3. Them nguoi muon")
+		fmt.Println("4. Xem danh sach nguoi muon")
+		fmt.Println("5. Muon sach")
+		fmt.Println("6. Xem lich su muon")
+		fmt.Println("7. Tra sach")
+		fmt.Println("8. Tim kiem sach")
+		fmt.Println("9. Thoat")
+		choice := utils.GetPositiveIntInput("Chon chuc nang: ")
+		utils.ClearScreen()
 
 		switch choice {
 		case 1:
-			fmt.Println("1")
+			if err := AddBook(lib); err != nil {
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 2:
-			fmt.Println("1")
+			if err := ListBook(lib); err != nil {
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 3:
-			fmt.Println("1")
+
+			if err := AddBorrower(lib); err != nil {
+
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 4:
-			fmt.Println("1")
+
+			if err := ListBorrower(lib); err != nil {
+
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 5:
-			fmt.Println("1")
+			if err := BorrowerBook(lib); err != nil {
+
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 6:
-			fmt.Println("1")
+
+			if err := ListBorrowerHistory(); err != nil {
+
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 7:
-			fmt.Println("1")
+
+			if err := ReturnBook(); err != nil {
+
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 8:
-			fmt.Println("1")
+
+			if err := SearchBook(); err != nil {
+
+				fmt.Printf("Loi!: %v\n", err)
+			}
 		case 9:
 			return
 		}
+
+		utils.ReadInput("Press Enter to continue...")
 	}
 }

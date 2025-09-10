@@ -1,6 +1,7 @@
 package main
 
-func main() {
-	// librarymangement.Menu()
+import "main/channel"
 
+func main() {
+	channel.Main()
 }

@@ -52,19 +52,19 @@ func Menu() {
 			}
 		case 6:
 
-			if err := ListBorrowerHistory(); err != nil {
+			if err := ListBorrowerHistory(lib); err != nil {
 
 				fmt.Printf("Loi!: %v\n", err)
 			}
 		case 7:
 
-			if err := ReturnBook(); err != nil {
+			if err := ReturnBook(lib); err != nil {
 
 				fmt.Printf("Loi!: %v\n", err)
 			}
 		case 8:
 
-			if err := SearchBook(); err != nil {
+			if err := SearchBook(lib); err != nil {
 
 				fmt.Printf("Loi!: %v\n", err)
 			}

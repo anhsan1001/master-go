@@ -53,17 +53,37 @@ func BorrowerBook(lib *Library) error {
 	return nil
 
 }
-func ListBorrowerHistory() error {
+func ListBorrowerHistory(lib *Library) error {
+	borrowerID := utils.GetNonEmptyString("Nhap ID nguoi muon: ")
+	transactions := lib.ListBorrowHistoryByBorrowerID(borrowerID)
+	if len(transactions) == 0 {
+		fmt.Println("Khong co lich su muon")
+		return nil
+	}
+	fmt.Println("Lich su muon sach")
+	for _, transaction := range transactions {
+		fmt.Printf("%s | %s | %s| %s\n", transaction.ID, transaction.BookID, transaction.BorrowerID, transaction.ReturnDate.Format("2006-01-01"))
+	}
 	return nil
 
 }
 
-func ReturnBook() error {
+func ReturnBook(lib *Library) error {
 
+	transationID := utils.GetNonEmptyString("Nhap ID transation: ")
+	lib.ReturnBookStore(transationID)
 	return nil
 
 }
-func SearchBook() error {
-	return nil
+func SearchBook(lib *Library) error {
+	query := utils.GetNonEmptyString("Nhap ten hoac tac gia de tim kiem sach: ")
+	books := lib.SearchBookStore(query)
+	if len(books) == 0 {
+		fmt.Println("Sach nay khong ton tai")
+	}
+	for _, book := range books {
 
+		fmt.Printf("ID: %v | Title: %v | Author: %v | Status: %v\n", book.ID, book.Title, book.Author, book.Status)
+	}
+	return nil
 }

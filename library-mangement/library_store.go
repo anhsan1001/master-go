@@ -3,6 +3,7 @@ package librarymangement
 import (
 	"fmt"
 	"main/models"
+	"strings"
 	"time"
 )
 
@@ -76,4 +77,46 @@ func (lib *Library) AddTransactionStore(id, bookID, borrowerID string) error {
 		BorrowerDate: time.Now(),
 	}
 	return nil
+}
+
+func (lib *Library) ListBorrowHistoryByBorrowerID(borrowerID string) []models.Transaction {
+
+	if _, borrowerExits := lib.borrower[borrowerID]; !borrowerExits {
+		return nil
+	}
+	var history []models.Transaction
+	for _, transaction := range lib.transaction {
+		if transaction.BorrowerID == borrowerID {
+			history = append(history, transaction)
+		}
+	}
+
+	return history
+}
+
+func (lib *Library) ReturnBookStore(transactionID string) error {
+	transaction, exitsTransaction := lib.transaction[transactionID]
+	if !exitsTransaction {
+		return fmt.Errorf("transaction khong ton tai")
+	}
+	book, bookExits := lib.book[transaction.BookID]
+	if !bookExits {
+		return fmt.Errorf("sach khong ton tai")
+	}
+	book.Status = "available"
+	lib.book[transaction.BookID] = book
+	transaction.ReturnDate = time.Now()
+	lib.transaction[transaction.ID] = transaction
+	return nil
+}
+
+func (lib *Library) SearchBookStore(queryString string) []models.Book {
+	var queryToLower = strings.ToLower(queryString)
+	var result []models.Book
+	for _, book := range lib.book {
+		if strings.Contains(strings.ToLower(book.Title), queryToLower) || strings.Contains(strings.ToLower(book.Author), queryToLower) {
+			result = append(result, book)
+		}
+	}
+	return result
 }

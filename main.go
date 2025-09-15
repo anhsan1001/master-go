@@ -1,7 +1,9 @@
 package main
 
-import "main/channel"
+import (
+	"main/context"
+)
 
 func main() {
-	channel.Main()
+	context.Main()
 }
